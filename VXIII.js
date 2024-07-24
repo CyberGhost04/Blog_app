@@ -17,6 +17,22 @@ class VXIII {
                 rdStream.pipe(res);
             };
 
+            res.status = (code) =>{
+                res.statusCode = code;
+                return res;
+            };
+
+            res.json = (body) => {
+                res.setHeader("Content-Type", "application/json");
+                res.end(JSON.stringify(body));
+                return res;
+            };
+
+            // if the route is not found
+            if(!this.routes[req.method.toUpperCase() + req.url]){
+                return res.status(404).json({error : "Not Found"});
+            }
+
             this.routes[req.method.toUpperCase() + req.url](req,res);    
         });
 
