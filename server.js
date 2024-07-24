@@ -5,6 +5,10 @@ const PORT = 9000;
 
 const server = new VX();        // new object for class
 
+server.route("GET", "/", (req,res)=>{
+    res.sendFile("./public/index.html", "text/html");
+});
+
 server.listen(PORT,ADDR,()=>{
     console.log("Listening on Port:" + PORT);
 });
